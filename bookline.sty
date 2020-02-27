@@ -1,0 +1,234 @@
+\ProvidesPackage{bookline}
+\newif\ifkhmer\khmerfalse
+\DeclareOption{arabic}{\khmerfalse}
+\DeclareOption{khmer}{\khmertrue}
+\ExecuteOptions{arabic}
+\ProcessOptions\relax
+\RequirePackage{geometry}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{mathtools}
+\RequirePackage{mathpazo}
+\RequirePackage{float}
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{tcolorbox}
+\RequirePackage{tkz-tab}
+\RequirePackage{graphicx}
+\RequirePackage{wrapfig}
+\RequirePackage{enumitem}
+\RequirePackage{multicol}
+\RequirePackage{tasks}
+\RequirePackage{fancyhdr}
+\RequirePackage{pifont}
+\RequirePackage{hyperref}
+\RequirePackage[explicit]{titlesec}
+\RequirePackage[no-math]{fontspec}
+\XeTeXlinebreaklocale "khm"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.5pt
+\setmainfont[% \textrm{text}
+Ligatures=TeX,%
+AutoFakeBold=1,%
+AutoFakeSlant=0.25]{Khmer OS}
+\setsansfont[% \textsf{text}
+Ligatures=TeX,%
+AutoFakeBold=1,%
+AutoFakeSlant=0.25]{Khmer OS Bokor}
+\setmonofont[% \texttt{text}
+Ligatures=TeX,%
+AutoFakeBold=1,%
+AutoFakeSlant=0.25]{Khmer OS}
+\def\linefill{\leavevmode \cleaders \hb@xt@ 1pt{\hss-\hss }\hfill \kern \z@}
+\titleformat{\chapter}[hang]{%
+	\color{blue}\Large\sffamily%
+}{\chaptertitlename~\thechapter}{1ex}{[ #1 ]\linefill}[]
+\titleformat{\section}[hang]{%
+	\color{blue}\large\sffamily%
+}{\thesection}{1ex}{[ #1 ]\linefill}[]
+\titleformat{\subsection}[hang]{%
+	\color{blue}\normalsize\sffamily%
+}{\thesubsection}{1ex}{[ #1 ]\linefill}[]
+\titlespacing{\chapter}{0pt}{\topskip}{\topskip}
+\titlespacing{\section}{0pt}{\topskip}{\topskip}
+\titlespacing{\subsection}{0pt}{\topskip}{\topskip}
+\geometry{margin=2cm,bindingoffset=1cm}
+\pagestyle{fancy}
+\lfoot{\itshape រៀបរៀងដោយ:~ឈ្មោះ}
+\rfoot{\itshape រក្សាសិទ្ធ\copyright ២០១៧}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+\def\chaptername{ជំពូក}
+\def\appendixname{សេចក្ដីបន្ថែម}
+\def\bibname{ឯកសារយោង}
+\def\contentsname{មាតិការ}
+\def\listfigurename{បញ្ជីរូបភាព}
+\def\listtablename{បញ្ជីតារាង}
+\def\figurename{រូប}
+\def\tablename{តារាង}
+\def\partname{ផ្នែក}
+\def\theoremname{ទ្រឹស្ដីបទ}
+\def\corollaryname{អនុសាធ្យ}
+\def\remarkname{សម្គាល់}
+\def\definitionname{និយមន័យ}
+\def\examplename{ឧទាហរណ៍}
+\def\exercisename{លំហាត់}
+\def\proofname{សម្រាយ}
+\theoremstyle{definition}
+\newtheorem{thm}{\theoremname}
+\newtheorem{crl}{\corollaryname}
+\newtheorem{rmk}{\remarkname}
+\newtheorem{dfn}{\definitionname}
+\newtheorem{exm}{\examplename}
+\newtheorem{exc}{\exercisename}
+\newtheorem*{thm*}{\theoremname}
+\newtheorem*{crl*}{\corollaryname}
+\newtheorem*{rmk*}{\remarkname}
+\newtheorem*{dfn*}{\definitionname}
+\newtheorem*{exm*}{\examplename}
+\newtheorem*{exc*}{\exercisename}
+\tcbset{%
+colback=blue!9,%
+colframe=blue,%
+leftrule=0pt,%
+rightrule=0pt,%
+arc=0pt}
+\tcolorboxenvironment{thm}{}
+\tcolorboxenvironment{crl}{}
+\tcolorboxenvironment{rmk}{}
+\tcolorboxenvironment{dfn}{}
+\tcolorboxenvironment{thm*}{}
+\tcolorboxenvironment{crl*}{}
+\tcolorboxenvironment{rmk*}{}
+\tcolorboxenvironment{dfn*}{}
+\let\o@arabic\@arabic
+\let\o@alph\@alph
+\let\o@Alph\@Alph
+\ifkhmer
+\let\@arabic\@khmer%
+\let\@alph\@alpkh%
+\else
+\let\@arabic\o@arabic%
+\let\@alph\o@alph%
+\fi
+\AddEnumerateCounter{\alpkh}{\@alpkh}{\char"1788}
+\AddEnumerateCounter{\khmer}{\@khmer}{\char"17e3}
+\SetEnumitemKey{1}{label=\color{blue}\arabic*.}
+\SetEnumitemKey{a}{label=\color{blue}\alph*.}
+\SetEnumitemKey{A}{label=\color{blue}\Alph*.}
+\SetEnumitemKey{i}{label=\color{blue}\roman*.}
+\SetEnumitemKey{I}{label=\color{blue}\Roman*.}
+\SetEnumitemKey{k}{label=\color{blue}\alpkh*.}
+\SetEnumitemKey{m}{label=\color{blue}\khmer*.}
+\SetEnumitemKey{b}{label=\color{blue}\ensuremath{\bullet}}
+\SetEnumitemKey{c}{label=\color{blue}\ensuremath{\circ}}
+\SetEnumitemKey{d}{label=\color{blue}\ensuremath{\diamond}}
+\SetEnumitemKey{t}{label=\color{blue}\ensuremath{\triangleright}}
+\setlist[enumerate]{leftmargin=*,labelsep=1ex,itemsep=1ex}
+\setlist[itemize]{leftmargin=*,labelsep=1ex,itemsep=1ex}
+\setlist[enumerate,1]{1}
+\setlist[enumerate,2]{a}
+\setlist[enumerate,3]{i}
+\setlist[enumerate,4]{A}
+\setlist[itemize,1]{b}
+\setlist[itemize,2]{c}
+\setlist[itemize,3]{d}
+\setlist[itemize,4]{t}
+\NewPatternFormat{k}{\@alpkh}% cntformats package
+\NewPatternFormat{m}{\@khmer}% counter-format=tsk[l]
+\settasks{%
+	counter-format=tsk[k].,%
+	label-format=\color{blue}\sffamily,%
+	label-offset=0.5ex,%
+	label-align=right,%
+	label-width=3.5ex,%
+	item-indent=4ex,%
+	column-sep=2ex,%
+	before-skip=0ex,%
+	after-skip=0ex,%
+	after-item-skip=0.5ex%
+}
+\hypersetup{%
+	linktoc=all,%
+	bookmarksnumbered,%
+	bookmarksopen,%
+	hidelinks}
+\raggedbottom
+\def\qedsymbol{\textcolor{blue}{\ensuremath{\blacksquare}}}
+% todo: declare experimental latex 3 package to use new language syntax
+\RequirePackage{expl3}[2017/04/15]
+% todo: provide new class
+\ProvidesExplClass{officialxam}{2018/06/24}{1.0}{Official Exam Sheet for Bac II}
+%todo: Define Khmer Numbers
+\cs_new:Npn \khmer #1 {
+  \exp_after:wN \int_to_khmer:n \cs:w c@#1 \cs_end:
+}
+\cs_new:Npn \int_to_khmer:n #1 {
+  \exp_after:wN \_int_to_khmer:n \__int_value:w #1 \q_nil
+}
+\cs_new:Npn \_int_to_khmer:n #1 {
+  \if_meaning:w #1 \q_nil
+  \else:%
+  \if_case:w #1
+  ០ \or: ១ \or: ២ \or: ៣ \or: ៤ \or: ៥ \or: ៦ \or: ៧ \or: ៨ \or: ៩
+  \fi:%
+  \exp_after:wN \_int_to_khmer:n
+  \fi:
+}
+\tex_let:D \@khmer \int_to_khmer:n
+\cs_new:Npn \khmernumeral #1 { \_int_to_khmer:n #1 \q_nil }
+%todo: Define Khmer Alphabets
+\cs_new:Npn \alpkh #1 {
+  \exp_after:wN \int_to_khmer_alph:n \cs:w c@#1\cs_end:
+}
+\cs_new:Npn \int_to_khmer_alph:n #1{
+  \int_to_symbols:nnn { #1 }{ 33 }{
+    {1}{ក} {2}{ខ} {3}{គ} {4}{ឃ} {5}{ង} 
+    {6}{ច} {7}{ឆ} {8}{ជ} {9}{ឈ} {10}{ញ} 
+    {11}{ដ} {12}{ឋ} {13}{ឌ} {14}{ឍ} {15}{ណ} 
+    {16}{ត} {17}{ថ} {18}{ទ} {19}{ធ} {20}{ន} 
+    {21}{ប} {22}{ផ} {23}{ព} {24}{ភ} {25}{ម} 
+    {26}{យ} {27}{រ} {28}{ល} {29}{វ} {30}{ស} 
+    {31}{ហ} {32}{ឡ} {33}{អ}
+  }
+}
+%
+\tex_let:D \@alpkh \int_to_khmer_alph:n
+\tex_let:D \@Alpkh \int_to_khmer_alph:n
+%todo: Define Khmer Short Date dd/mm/yyyy
+\tl_new:N \l_khmer_short_date_tl
+\tl_set:Nn \l_khmer_short_date_tl {%
+  \if_int_compare:w \c_sys_day_int < 10
+  \int_to_khmer:n { 0\c_sys_day_int }
+  \else:
+  \int_to_khmer:n \c_sys_day_int
+  \fi:
+  /
+  \if_int_compare:w \c_sys_month_int < 10
+  \int_to_khmer:n { 0\c_sys_month_int }
+  \else:
+  \int_to_khmer:n \c_sys_month_int
+  \fi:%
+  /
+  \int_to_khmer:n \c_sys_year_int
+}
+\tex_let:D \khmershortdate \l_khmer_short_date_tl
+%todo: Define Khmer Date dd~month~yyyy
+\tl_new:N \l_khmer_date_tl
+\tl_set:Nn \l_khmer_date_tl {%
+  ថ្ងៃទី~
+  \if_int_compare:w \c_sys_day_int < 10
+  \int_to_khmer:n { 0\c_sys_day_int }
+  \else:
+  \int_to_khmer:n \c_sys_day_int
+  \fi:{}~
+  ខែ~
+  \if_case:w \c_sys_month_int
+  \or: មករា \or: កុម្ភៈ\or: មិនា\or: មេសា\or: ឧសភា\or: មិថុនា\or: កក្កដា\or: សីហា\or: កញ្ញា\or: តុលា\or: វិច្ឆិកា\or: ធ្នូ
+  \fi:{}~
+  ឆ្នាំ~
+  \int_to_khmer:n \c_sys_year_int
+}
+\tex_let:D \khmerdate \l_khmer_date_tl
+%
+\endinput
